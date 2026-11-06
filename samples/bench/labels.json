@@ -1,0 +1,83 @@
+{
+  "bench_set": "dupe-bench-2026.1",
+  "description": "重复检测四级漏斗的标注基准集：两张脱敏科室表（各 11 行）+ 11 条成对标注。数据只含指标级监管数据，无患者可识别明细。三种标注：duplicate_record（同一件事被填了两遍，漏斗应当报出来）/ same_indicator（同一个指标但不是同一件事，漏斗不该报）/ not_duplicate（明确不是同一件事，漏斗不该报）。",
+  "labels": [
+    {
+      "left": { "source": "科室一表", "row": 1 },
+      "right": { "source": "科室二表", "row": 1 },
+      "label": "duplicate_record",
+      "basis": "同一业务主键 MER-TL-04|0301|2026-Q3|BK-01，指标、分子分母、填报值与单位逐字一致 —— 同一件事在两张科室表里各填了一遍",
+      "note": "L1 确定性键应报出"
+    },
+    {
+      "left": { "source": "科室一表", "row": 2 },
+      "right": { "source": "科室二表", "row": 2 },
+      "label": "duplicate_record",
+      "basis": "同一业务主键 MER-TL-04|0301|2026-Q3|BK-02，指标与取值一致，计量单位一表写全角「％」、另一表写半角「%」 —— 同一个单位",
+      "note": "单位写法不同，取值仍一致"
+    },
+    {
+      "left": { "source": "科室一表", "row": 3 },
+      "right": { "source": "科室二表", "row": 3 },
+      "label": "duplicate_record",
+      "basis": "同一业务主键 MER-ME-01|0301|2026-Q3|BK-03，指标名称一表写「CT/MRI检查记录符合率」、另一表写「CT、MRI检查记录符合率」 —— 顿号与斜杠是同一份检查项",
+      "note": "指标名称别名写法"
+    },
+    {
+      "left": { "source": "科室一表", "row": 4 },
+      "right": { "source": "科室二表", "row": 4 },
+      "label": "duplicate_record",
+      "basis": "同一业务主键 MER-ME-01|0301|2026-Q3|BK-04，取值一致，指标名称一表写「CT/MRI检查记录符合率」、另一表漏了一个「查」字",
+      "note": "指标名称差 1 个字"
+    },
+    {
+      "left": { "source": "科室一表", "row": 5 },
+      "right": { "source": "科室二表", "row": 5 },
+      "label": "duplicate_record",
+      "basis": "同一业务主键 MER-TL-01|0301|2026-Q3|BK-05，指标、取值与单位逐字一致",
+      "note": "另一个指标上的完全一致"
+    },
+    {
+      "left": { "source": "科室一表", "row": 6 },
+      "right": { "source": "科室二表", "row": 6 },
+      "label": "duplicate_record",
+      "basis": "同一业务主键 MER-TQ-01|0301|2026-Q3|BK-06，取值一致，指标名称一表写「出院患者病历2日归档率」、另一表省了「患者」二字",
+      "note": "指标名称别名写法"
+    },
+    {
+      "left": { "source": "科室一表", "row": 7 },
+      "right": { "source": "科室二表", "row": 7 },
+      "label": "same_indicator",
+      "basis": "同一业务主键 MER-TL-04|0301|2026-Q3|BK-07，但填报值一表 97.0、另一表 97.5 —— 同一个指标的两次填报，属订正与冲突，归实体绑定层的「待人工判定」，不是两条重复记录",
+      "note": "同键异值：漏斗不报为重复是对的"
+    },
+    {
+      "left": { "source": "科室一表", "row": 8 },
+      "right": { "source": "科室二表", "row": 8 },
+      "label": "same_indicator",
+      "basis": "两个院区（机构代码 ORG-001 与 ORG-002）各报各的，科室代码恰好都叫 0301、指标与取值也相同 —— 同一个指标，但不是同一件事",
+      "note": "近距离负例：漏斗若报出来就是误报"
+    },
+    {
+      "left": { "source": "科室一表", "row": 9 },
+      "right": { "source": "科室二表", "row": 9 },
+      "label": "same_indicator",
+      "basis": "同一个指标 MER-TL-02，但业务主键不同（BK-13 与 BK-14）、填报值也不同（80.0 与 75.0）—— 代表两条独立记录",
+      "note": "业务主键不同即不是同一条记录"
+    },
+    {
+      "left": { "source": "科室一表", "row": 11 },
+      "right": { "source": "科室二表", "row": 11 },
+      "label": "not_duplicate",
+      "basis": "一表是 MER-TL-02 手术记录24小时内完成率、另一表是 MER-TL-03 出院记录24小时内完成率 —— 两个不同指标，名称相近、取值相同，但明确不是同一件事",
+      "note": "远距离负例：约束语义级不要越界"
+    },
+    {
+      "left": { "source": "科室一表", "row": 10 },
+      "right": { "source": "科室二表", "row": 10 },
+      "label": "duplicate_record",
+      "basis": "同一业务主键 MER-ME-01|0301|2026-Q3|BK-12，取值一致，指标名称一表写「CT/MRI检查记录符合率」、另一表写「计算机断层与磁共振检查记录符合率」—— 同一件事的两种写法，差异远大于字符编辑距离",
+      "note": "四级判据都认不出这一对：留给语义归并这一级"
+    }
+  ]
+}

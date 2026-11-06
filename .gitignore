@@ -1,0 +1,60 @@
+# ---- 凭据与本地配置（绝不入库）----
+.env
+.env.local
+*.env
+!.env.example
+
+# ---- 构建产物 ----
+target/
+dist/
+build/
+release/
+*.rlib
+*.rmeta
+
+# ---- 依赖目录 ----
+node_modules/
+vendor/
+.cargo-vendor/
+# .cargo/config.toml 由 scripts/offline-build.sh 生成（把依赖来源切到 vendor/）。
+# 依赖目录不进库，这份配置也不进 —— 否则干净 clone 下来会指向不存在的目录，cargo 直接编不动。
+.cargo/
+
+# ---- 运行时数据与日志 ----
+data/
+logs/
+*.log
+tmp/
+temp/
+.cache/
+.regval/
+*.db
+*.db-journal
+*.db-wal
+
+# ---- Python 侧（样例生成器）----
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ---- 其它 ----
+coverage/
+.next/
+.nuxt/
+*.pyc
+*.pyo
+*.tmp
+*.temp
+*.swp
+.DS_Store
+
+# ---- round 元数据（不属于本项目）----
+score.json
+progress.txt
+task.json
+
+# 注意：qrcode.jpg、docs/、samples/、cases/、tests/ 属于交付物，不排除。

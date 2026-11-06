@@ -1,0 +1,55 @@
+[package]
+name = "regulatory-report-validate"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85"
+description = "卫健上报校验系统 —— 嵌在 Excel/WPS/CSV 里的上报表插件：口径规则引擎 + 重复检测四级漏斗 + 幂等上报"
+license = "MIT"
+publish = false
+
+[[bin]]
+name = "regval"
+path = "src/main.rs"
+
+[lib]
+name = "regval"
+path = "src/lib.rs"
+
+[dependencies]
+# 本机校验库：bundled SQLite，零服务依赖，单文件状态库
+rusqlite = { version = "0.32", features = ["bundled"] }
+# 读表：xlsx（Excel/WPS 通用）+ csv（专网报送机无宏环境时的降级路径）
+calamine = "0.26"
+csv = "1.4"
+# CSV 编码容错：中文 Windows 导出的 GBK 表与 UTF-8/GBK 混编表的解码
+encoding_rs = "0.8"
+# 引擎 <-> 表格插件的 JSON 契约（带 schema_version）
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+# 出站 HTTP：院内卫健上报网关 + HIS 科室目录 + 模型端点
+reqwest = { version = "0.12", default-features = false, features = [
+    "blocking",
+    "json",
+    "rustls-tls",
+] }
+# CLI：8 个子命令（validate / push / status / rules / merge / export / replay / doctor）
+clap = { version = "4", features = ["derive"] }
+# 口径规则 SQL 的语法预校验与出错定位（报出错 token 与偏移）
+sqlite3-parser = "0.17"
+# 行键 / 幂等键 / 载荷摘要用的稳定摘要（Task 2 起只用行键，Task 27 起用于幂等上报）
+sha2 = "0.10"
+hex = "0.4"
+# 运行时间戳（契约 generated_at、落库 created_at）
+chrono = "0.4"
+
+[dev-dependencies]
+# 测试期用的临时目录与协议替身依赖
+tempfile = "3"
+# 测试期读写 xlsx（验证写回不动原表列与公式）
+zip = { version = "2", default-features = false, features = ["deflate"] }
+# 基准测试读子进程峰值常驻内存（getrusage）
+libc = "0.2"
+
+[profile.release]
+opt-level = 2
+lto = "thin"

@@ -1,0 +1,99 @@
+{
+  "dataset": "regval-sample-2026.1-baseline",
+  "seed": 20261107,
+  "generator": "samples/generate.py",
+  "source": "全部为合成数据，非真实院内数据；只含指标级监管数据，无患者可识别明细",
+  "table_count": 6,
+  "rows_per_table": 200,
+  "total_rows": 1200,
+  "tables": [
+    {
+      "file": "病案统计室表.csv",
+      "dept_code": "0301",
+      "org_code": "ORG-001",
+      "rows": 200,
+      "encoding": "utf-8",
+      "gbk_rows": 0,
+      "sha256": "ae20ab9b1ccb705d0b7fb8ea280d28e3e8b3346719f93fa4b8faa4545c626b75"
+    },
+    {
+      "file": "病案室表.csv",
+      "dept_code": "0302",
+      "org_code": "ORG-001",
+      "rows": 200,
+      "encoding": "utf-8",
+      "gbk_rows": 0,
+      "sha256": "39c660073494d12f026eba3589afeda0112efd0610431e7764105a6a6e699bba"
+    },
+    {
+      "file": "医技部表.csv",
+      "dept_code": "0303",
+      "org_code": "ORG-001",
+      "rows": 200,
+      "encoding": "utf-8+gbk 混编",
+      "gbk_rows": 40,
+      "sha256": "5bce200e5faa4f4828e149b3ca6ed9933366a0c8aafe63e51af5b0840183616a"
+    },
+    {
+      "file": "临床科室表.csv",
+      "dept_code": "0304",
+      "org_code": "ORG-001",
+      "rows": 200,
+      "encoding": "utf-8",
+      "gbk_rows": 0,
+      "sha256": "8782a4ac1743b4b7292c8a8d72f37a1769a18cb108f3edb9b641e8bc85669d68"
+    },
+    {
+      "file": "院感科表.csv",
+      "dept_code": "0305",
+      "org_code": "ORG-002",
+      "rows": 200,
+      "encoding": "utf-8",
+      "gbk_rows": 0,
+      "sha256": "100c1a7f78bec546a0c7543dfbb52d90f14518ded9b49f47f1c695271320a28a"
+    },
+    {
+      "file": "门诊病案室表.csv",
+      "dept_code": "0306",
+      "org_code": "ORG-002",
+      "rows": 200,
+      "encoding": "utf-8",
+      "gbk_rows": 0,
+      "sha256": "07d0742267dfdde9cfde5cb4fdb6c485c1894a219c5247f44752d65059ddd93d"
+    }
+  ],
+  "merged": {
+    "file": "合并表.csv",
+    "rows": 1200,
+    "sha256": "588aaf80cc5610a3811d74c1138664b74ea66f43c9fd49a00454bcde618cd32b"
+  },
+  "dept_directory": {
+    "file": "dept_directory.json",
+    "entries": 6,
+    "sha256": "ac40c4e7be44b0123c34de83004696bed1cddd03f0ada1da93b4499fd5ec2005"
+  },
+  "defects": {
+    "GBK 混编行（医技部表.csv）": 40,
+    "公式不符": 35,
+    "分母为零": 8,
+    "单位不符": 16,
+    "单位别名": 36,
+    "待人工判定（同键异值）": 12,
+    "必填缺失": 25,
+    "必填缺失（纯空白值）": 8,
+    "指标名称别名": 9,
+    "枚举越界（报告期格式）": 8,
+    "枚举越界（报告期类型）": 10,
+    "枚举越界（指标编号不在册）": 7,
+    "枚举越界（计量单位）": 8,
+    "生僻字": 17,
+    "疑似重复 · 归一化候选（L2）": 12,
+    "疑似重复 · 确定性键（L1）": 12,
+    "疑似重复 · 编辑距离候选（L3）": 24,
+    "科室代码不在目录": 11,
+    "科室名称写法不一致": 16,
+    "非数值": 7,
+    "首尾全角空白": 7,
+    "首尾半角空白": 6
+  }
+}

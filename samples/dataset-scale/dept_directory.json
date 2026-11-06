@@ -1,0 +1,47 @@
+[
+  {
+    "dept_code": "0301",
+    "dept_name": "病案统计室",
+    "aliases": [
+      "病案统计室（本部）",
+      "病案统计室（东区）"
+    ],
+    "parent_code": "0300"
+  },
+  {
+    "dept_code": "0302",
+    "dept_name": "病案室",
+    "aliases": [
+      "病案室（住院部）"
+    ],
+    "parent_code": "0300"
+  },
+  {
+    "dept_code": "0303",
+    "dept_name": "医技部",
+    "aliases": [
+      "医技部（本部）"
+    ],
+    "parent_code": "0300"
+  },
+  {
+    "dept_code": "0304",
+    "dept_name": "临床科室",
+    "aliases": [],
+    "parent_code": "0300"
+  },
+  {
+    "dept_code": "0305",
+    "dept_name": "院感科",
+    "aliases": [
+      "医院感染管理科"
+    ],
+    "parent_code": "0300"
+  },
+  {
+    "dept_code": "0306",
+    "dept_name": "门诊病案室",
+    "aliases": [],
+    "parent_code": "0300"
+  }
+]
